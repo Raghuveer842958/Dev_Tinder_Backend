@@ -33,9 +33,11 @@ connectDB()
     });
   })
   .catch((err) => {
-    console.error("Database cannot be connected!!");
+    console.error("Database cannot be connected!!",err);
   });
 
   // mongodb+srv://raghuveerchauhan7787:<db_password>@namastenodejs.88ivh.mongodb.net/?retryWrites=true&w=majority&appName=namasteNodejs
 
   // Raghuveer__M001M
+
+  // node src/app.js
