@@ -34,6 +34,7 @@ connectDB()
   })
   .catch((err) => {
     console.error("Database cannot be connected!!",err);
+    console.log("Error in Database connections");
   });
 
   // mongodb+srv://raghuveerchauhan7787:<db_password>@namastenodejs.88ivh.mongodb.net/?retryWrites=true&w=majority&appName=namasteNodejs
