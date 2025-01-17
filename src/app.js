@@ -10,15 +10,15 @@ const allowedOrigins = [
   "https://devtinder-web-8dlo.onrender.com",
 ];
 
+app.use(express.json());
+app.use(cookieParser());
+
 app.use(
   cors({
     origin: "http://localhost:3000",
     credentials: true,
   })
 );
-
-app.use(express.json());
-app.use(cookieParser());
 
 const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
@@ -34,7 +34,7 @@ connectDB()
   .then(() => {
     console.log("Database connection established...");
     app.listen(process.env.PORT, () => {
-      console.log("Server is successfully listening on port process.env.PORT...");
+      console.log("Server is successfully listening on port... ",process.env.PORT);
     });
   })
   .catch((err) => {
