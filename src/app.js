@@ -5,20 +5,28 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://devtinder-web-8dlo.onrender.com",
-];
-
 app.use(express.json());
 app.use(cookieParser());
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://devtinder-web-8dlo.onrender.com", // Add as many origins as needed
+];
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
-    credentials: true,
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        // Allow requests with no origin (like mobile apps, Postman, etc.)
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, // Allow cookies and credentials
   })
 );
+
 
 const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
