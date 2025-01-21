@@ -1,8 +1,11 @@
 const express = require("express");
 const profileRouter = express.Router();
-
 const { userAuth } = require("../middlewares/auth");
 const { validateEditProfileData } = require("../utils/validation");
+const multer = require("multer");
+const cloudinary = require("../config/cloudinary");
+const storage = multer.diskStorage({});
+const upload = multer({ storage });
 
 profileRouter.get("/profile/view", userAuth, async (req, res) => {
   try {
@@ -14,25 +17,32 @@ profileRouter.get("/profile/view", userAuth, async (req, res) => {
   }
 });
 
-profileRouter.patch("/profile/edit", userAuth, async (req, res) => {
-  try {
-    if (!validateEditProfileData(req)) {
-      throw new Error("Invalid Edit Request");
+profileRouter.patch(
+  "/profile/edit",
+  userAuth,
+  async (req, res) => {
+    try {
+      if (!validateEditProfileData(req)) {
+        throw new Error("Invalid Edit Request");
+      }
+
+      const loggedInUser = req.user;
+
+      Object.keys(req.body).forEach(
+        (key) => (loggedInUser[key] = req.body[key])
+      );
+      
+      await loggedInUser.save();
+
+      res.json({
+        message: `${loggedInUser.firstName}, your profile updated successfuly`,
+        data: loggedInUser,
+      });
+    } catch (err) {
+      console.log("Error is here :", err);
+      res.status(400).send("ERROR : " + err.message);
     }
-
-    const loggedInUser = req.user;
-
-    Object.keys(req.body).forEach((key) => (loggedInUser[key] = req.body[key]));
-
-    await loggedInUser.save();
-
-    res.json({
-      message: `${loggedInUser.firstName}, your profile updated successfuly`,
-      data: loggedInUser,
-    });
-  } catch (err) {
-    res.status(400).send("ERROR : " + err.message);
   }
-});
+);
 
 module.exports = profileRouter;
