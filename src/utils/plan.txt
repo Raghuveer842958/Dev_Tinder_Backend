@@ -1,0 +1,29 @@
+// i have 2 days left 
+  22 23
+
+// 22 
+    #Morning
+  -->cloudinary
+  -->store chat
+
+    #Evening
+  -->Dev Tinder Bug fix 
+  -->NetflixGPT Bug fix 
+
+    #Night
+  -->Voating Application pura study 
+  -->Pure project ka working samjhana hai aur answer prepare karana hai
+
+// 23
+     #Morning
+  -->Dsa question prepare karana using javaScript
+
+     #Evening
+  -->[javaScript,React,Node,Express,MongoDB] interview question prepare karana hai
+
+     #Night
+  -->[OOPS,CN,OS,DBMS] interview question prepare karana hai
+
+
+
+

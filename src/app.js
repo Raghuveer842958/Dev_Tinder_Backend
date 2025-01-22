@@ -6,13 +6,21 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const http=require("http");
 
-app.use(express.json());
+app.use(express.json({
+  limit:"20mb"
+}));
 app.use(cookieParser());
 
 const allowedOrigins = [
   "http://localhost:3000",
   "https://devtinder-web-8dlo.onrender.com", // Add as many origins as needed
 ];
+
+// app.use(
+//   cors({
+//     origin:"http://localhost:3000"
+//   })
+// )
 
 app.use(
   cors({

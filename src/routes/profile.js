@@ -2,36 +2,46 @@ const express = require("express");
 const profileRouter = express.Router();
 const { userAuth } = require("../middlewares/auth");
 const { validateEditProfileData } = require("../utils/validation");
+const fs = require("fs");
+
+const cloudinary = require("../utils/cloudinary");
 const multer = require("multer");
-const cloudinary = require("../config/cloudinary");
-const storage = multer.diskStorage({});
-const upload = multer({ storage });
-
-profileRouter.get("/profile/view", userAuth, async (req, res) => {
-  try {
-    const user = req.user;
-
-    res.send(user);
-  } catch (err) {
-    res.status(400).send("ERROR : " + err.message);
-  }
+var upload = multer({
+  storage: multer.diskStorage({}),
+  limits: { fileSize: 500000 },
 });
 
 profileRouter.patch(
   "/profile/edit",
   userAuth,
+  upload.single("file"),
   async (req, res) => {
     try {
       if (!validateEditProfileData(req)) {
         throw new Error("Invalid Edit Request");
       }
 
+      console.log("Request file is :", req.file);
+
       const loggedInUser = req.user;
 
       Object.keys(req.body).forEach(
         (key) => (loggedInUser[key] = req.body[key])
       );
-      
+
+      if (!fs.existsSync(req.file.path)) {
+        throw new Error("Temporary file does not exist.");
+      }
+
+      if (req.file) {
+        const res = await cloudinary.uploader.upload(req.file.path, {
+          folder: "/Raghuveer",
+          transformation: [{ width: 1000, height: 1000, crop: "limit" }],
+          timeout: 120000, // 60 seconds
+        });
+        console.log("cloudinary response is :", res);
+      }
+
       await loggedInUser.save();
 
       res.json({
@@ -44,5 +54,15 @@ profileRouter.patch(
     }
   }
 );
+
+profileRouter.get("/profile/view", userAuth, async (req, res) => {
+  try {
+    const user = req.user;
+
+    res.send(user);
+  } catch (err) {
+    res.status(400).send("ERROR : " + err.message);
+  }
+});
 
 module.exports = profileRouter;
