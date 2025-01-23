@@ -15,20 +15,20 @@ const validateEditProfileData = (req) => {
   const allowedEditFields = [
     "firstName",
     "lastName",
-    "emailId",
     "photoUrl",
     "gender",
     "age",
     "about",
     "skills",
-    "preview",
   ];
+
+  console.log("Editable field :",Object.keys(req.body));
 
   const isEditAllowed = Object.keys(req.body).every((field) =>
     allowedEditFields.includes(field)
   );
 
-  console.log("Validation Result is :",isEditAllowed);
+  console.log("isEditAllowed result is :",isEditAllowed);
 
   return isEditAllowed;
 };

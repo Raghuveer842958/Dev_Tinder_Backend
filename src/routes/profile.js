@@ -29,9 +29,9 @@ profileRouter.patch(
         (key) => (loggedInUser[key] = req.body[key])
       );
 
-      if (!fs.existsSync(req.file.path)) {
-        throw new Error("Temporary file does not exist.");
-      }
+      // if (!fs.existsSync(req?.file?.path)) {
+      //   throw new Error("Temporary file does not exist.");
+      // }
 
       if (req.file) {
         const res = await cloudinary.uploader.upload(req.file.path, {
