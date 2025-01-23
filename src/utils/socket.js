@@ -5,9 +5,11 @@ const Chat = require("../models/chat");
 const initilizeSocket = (server) => {
   const io = socket(server, {
     cors: {
-      origin: "http://localhost:3000",
+      origin: "https://devtinder-web-8dlo.onrender.com",
     },
   });
+
+  // http://localhost:3000
 
   // In simple terms, this line waits for a new client to connect, and when a connection happens, it executes the provided function, allowing you to define what should happen for that specific client (e.g., joining a chat room, sending or receiving messages).
   io.on("connection", (socket) => {
@@ -30,14 +32,16 @@ const initilizeSocket = (server) => {
         });
 
         if (!chat) {
-          console.log("No chat exit in Between this two user.......from socket");
+          console.log(
+            "No chat exit in Between this two user.......from socket"
+          );
           chat = new Chat({
             participant: [userId, targetUserId],
             message: [],
           });
         } else {
           console.log("chat exit in Between this two user.......from socket");
-          console.log("chat is......from socket :",chat);
+          console.log("chat is......from socket :", chat);
         }
 
         chat.message.push({
@@ -45,9 +49,14 @@ const initilizeSocket = (server) => {
           text,
         });
 
-        const savedChat=await chat.save();
-        console.log("Saved chat is...from socket :",savedChat)
-        io.to(roomId).emit("messageRecived", { senderId:userId,firstName, lastName, text });
+        const savedChat = await chat.save();
+        console.log("Saved chat is...from socket :", savedChat);
+        io.to(roomId).emit("messageRecived", {
+          senderId: userId,
+          firstName,
+          lastName,
+          text,
+        });
       }
     );
 

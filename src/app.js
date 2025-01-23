@@ -13,7 +13,7 @@ app.use(cookieParser());
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://devtinder-web-8dlo.onrender.com", // Add as many origins as needed
+  "https://devtinder-web-8dlo.onrender.com", 
 ];
 
 // app.use(
