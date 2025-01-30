@@ -13,7 +13,7 @@ app.use(cookieParser());
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://devtinder-web-8dlo.onrender.com", 
+  "https://dev-tinder-web-eight.vercel.app", 
 ];
 
 // app.use(
