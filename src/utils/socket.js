@@ -5,7 +5,7 @@ const Chat = require("../models/chat");
 const initilizeSocket = (server) => {
   const io = socket(server, {
     cors: {
-      origin: "http://localhost:3000",
+      origin: "https://dev-tinder-web-eight.vercel.app",
     },
   });
 
