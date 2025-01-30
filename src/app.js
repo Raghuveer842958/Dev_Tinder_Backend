@@ -62,8 +62,8 @@ connectDB()
   });
 
 
-// 1.Hoisting
-// 2.Cloudinary
+// 1.Hoisting ✅
+// 2.Cloudinary ✅
 // 3.Edit profie all Bug fix
 // 4.SignUp Login Bug Fixed
 // 5.SignUp by google
