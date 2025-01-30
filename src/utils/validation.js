@@ -19,7 +19,7 @@ const validateEditProfileData = (req) => {
     "gender",
     "age",
     "about",
-    "skills",
+    // "skills",
   ];
 
   console.log("Editable field :",Object.keys(req.body));

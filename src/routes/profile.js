@@ -2,14 +2,9 @@ const express = require("express");
 const profileRouter = express.Router();
 const { userAuth } = require("../middlewares/auth");
 const { validateEditProfileData } = require("../utils/validation");
-const fs = require("fs");
 
 const cloudinary = require("../utils/cloudinary");
-const multer = require("multer");
-var upload = multer({
-  storage: multer.diskStorage({}),
-  limits: { fileSize: 500000 },
-});
+var upload = require("../utils/multer");
 
 profileRouter.patch(
   "/profile/edit",
@@ -29,16 +24,15 @@ profileRouter.patch(
         (key) => (loggedInUser[key] = req.body[key])
       );
 
-      // if (!fs.existsSync(req?.file?.path)) {
-      //   throw new Error("Temporary file does not exist.");
-      // }
+      // const optional = {
+      //   folder: "/Raghuveer",
+      //   transformation: [{ width: 1000, height: 1000, crop: "limit" }],
+      //   timeout: 120000, // 60 seconds
+      // };
 
       if (req.file) {
-        const res = await cloudinary.uploader.upload(req.file.path, {
-          folder: "/Raghuveer",
-          transformation: [{ width: 1000, height: 1000, crop: "limit" }],
-          timeout: 120000, // 60 seconds
-        });
+        const res = await cloudinary.uploader.upload(req.file.path);
+        loggedInUser.photoUrl=res.secure_url;
         console.log("cloudinary response is :", res);
       }
 

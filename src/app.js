@@ -67,8 +67,9 @@ connectDB()
     console.log("Error in Database connections");
   });
 
-// mongodb+srv://raghuveerchauhan7787:<db_password>@namastenodejs.88ivh.mongodb.net/?retryWrites=true&w=majority&appName=namasteNodejs
 
-// Raghuveer__M001M
-
-// node src/app.js
+// 1.Hoisting
+// 2.Cloudinary
+// 3.Edit profie all Bug fix
+// 4.SignUp Login Bug Fixed
+// 5.SignUp by google

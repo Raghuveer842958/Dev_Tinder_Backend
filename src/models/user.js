@@ -53,7 +53,6 @@ const userSchema = new mongoose.Schema(
     },
     photoUrl: {
       type: String,
-      default: "https://geographyandyou.com/images/user-profile.png",
       validate(value) {
         if (!validator.isURL(value)) {
           throw new Error("Invalid Photo URL: " + value);
@@ -64,16 +63,26 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "This is a default about of the user!",
     },
-    skills: {
-      type: [String],
-      default: [],
-    },
+    // skills: {
+    //   type: [String],
+    //   // default: [],
+    // },
     isPremium: {
       type: Boolean,
       default: false,
     },
     membershipType: {
       type: String,
+    },
+    isVerified: {
+      type: Boolean,
+      default: false, // User is not verified initially
+    },
+    otp: {
+      type: String, // OTP stored as string
+    },
+    otpExpires: {
+      type: Date, // Expiry time of OTP
     },
   },
   {

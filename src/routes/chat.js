@@ -7,21 +7,10 @@ chatRouter.get("/chat/:targetUserId", userAuth, async (req, res) => {
   const { targetUserId } = req.params;
   const userId = req.user._id;
 
-  //   let chat = await Chat.findOne({
-  //     participant: { $all: [userId, targetUserId] },
-  //   }).populate({
-  //     path: "messages.senderId",
-  //     select: "firstName lastName",
-  //   });
 
   let chat = await Chat.findOne({
     participant: { $all: [userId, targetUserId] },
   });
-
-//   .populate({
-//     path: "participants",
-//     select: "firstName lastName",
-//   });
 
   if (!chat) {
     console.log("No chat exit in Between this two user......from routes");

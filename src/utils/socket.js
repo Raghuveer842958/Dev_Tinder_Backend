@@ -5,7 +5,7 @@ const Chat = require("../models/chat");
 const initilizeSocket = (server) => {
   const io = socket(server, {
     cors: {
-      origin: "https://devtinder-web-8dlo.onrender.com",
+      origin: "http://localhost:3000",
     },
   });
 

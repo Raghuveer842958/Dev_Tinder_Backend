@@ -26,6 +26,7 @@ requestRouter.post(
         return res.status(404).json({ message: "User not found!" });
       }
 
+      // checks concetion previously exist or not 
       const existingConnectionRequest = await ConnectionRequest.findOne({
         $or: [
           { fromUserId, toUserId },
