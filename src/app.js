@@ -16,12 +16,6 @@ const allowedOrigins = [
   "https://dev-tinder-web-eight.vercel.app", 
 ];
 
-// app.use(
-//   cors({
-//     origin:"http://localhost:3000"
-//   })
-// )
-
 app.use(
   cors({
     origin: (origin, callback) => {
