@@ -6,6 +6,7 @@ const initilizeSocket = (server) => {
   const io = socket(server, {
     cors: {
       origin: "https://dev-tinder-web-eight.vercel.app",
+      // origin: "http://localhost:3000"
     },
   });
 
