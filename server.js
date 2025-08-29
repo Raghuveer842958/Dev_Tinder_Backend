@@ -12,8 +12,8 @@ app.use(express.json({
 app.use(cookieParser());
 
 const allowedOrigins = [
-  "http://localhost:3000",
-  "https://dev-tinder-web-eight.vercel.app", 
+  "https://dev-tinder-web-eight.vercel.app",
+  "https://devtinder-web-8dlo.onrender.com",
 ];
 
 app.use(
